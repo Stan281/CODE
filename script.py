@@ -3,21 +3,23 @@ from bs4 import BeautifulSoup as bs
 import csv
 
 
-url = 'http://books.toscrape.com/catalogue/dark-notes_800/index.html'
-response = requests.get(url)
+website_url = 'http://books.toscrape.com/catalogue/dark-notes_800/index.html'
+response = requests.get(website_url)
 page = response.content
 
 soup = bs(page, features='html.parser')
+title = soup.find(class_='col-sm-6 product_main').h1
+print(title.text)
 
-articles = soup.find_all("article", class_="product_page")
-for article in articles:
+product_description = soup.find('article', class_='product_page').find(id='product_description').next_sibling
+print(product_description)
+
+'''title  = soup.find_all('article', class_="product_page")
+for article in title :
 	title = article.h1.text
-	print(title)
-
-'''title = soup.findAll('h1', class_="col-sm-6 product_main")
-print(title)'''
-
-'''product_description = soup.findAll('article'="description")
+	print(title)'''
+'''
+product_description = soup.find('h2', id='product_description')
 print(product_description)'''
 
 
