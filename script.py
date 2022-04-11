@@ -6,13 +6,29 @@ import csv
 website_url = 'http://books.toscrape.com/catalogue/dark-notes_800/index.html'
 response = requests.get(website_url)
 page = response.content
-
 soup = bs(page, features='html.parser')
+
+
 title = soup.find(class_='col-sm-6 product_main').h1
 print(title.text)
 
-product_description = soup.find('article', class_='product_page').find(id='product_description').next_sibling
-print(product_description)
+#product_description = soup.find('article', class_='product_page').find(id='product_description').next_sibling
+#print(product_description)
+
+product_description = soup.find('head').find('meta', attrs={'name':'description'})
+print(product_description.attrs['content'].strip())
+
+universal_product_code = soup.find('table',class_='table table-striped')
+listetr = universal_product_code.find_all('tr')
+book_info={}
+for tr in listetr:
+	key = tr.th.text
+	value = tr.td.text
+	book_info[key]=value	
+	
+#print(listetr)
+print(book_info)
+
 
 '''title  = soup.find_all('article', class_="product_page")
 for article in title :
