@@ -21,22 +21,18 @@ print(title)'''
 print(product_description)'''
 
 
-"""titles = soup.findAll('ol', class_="row")
+'''titles = soup.findAll('ol', class_="row")
 titles_text = []
 for title in titles:
 	titles_text.append(title.string)
-
 en_tete = ['titre']
 with open('data.csv', 'w') as fichier_csv:
 	writer = csv.writer(fichier_csv, delimiter=',')
 	writer.writerow(en_tete)
 	# zip permet d'itérer sur deux listes à la fois
 	for titles in zip(titles_text):
-		writer.writerow([titles])
+		writer.writerow([titles])'''
 
 
 
 
-
-
-#descriptions = soup.find_all("p", class_="gem-c-document-list__item-description")"""
