@@ -1,5 +1,6 @@
 import requests
 from bs4 import BeautifulSoup
+import csv
 import re
 
 url = 'http://books.toscrape.com/catalogue/dark-notes_800/index.html'
@@ -25,9 +26,10 @@ for article in book:
 category = soup.find("ul", class_="breadcrumb")
 book_category = category.find_all("li")[-2].find("a").text
 
-with open('book.csv', 'w+') as extract:
-    extract.write('product_page_url, universal_ product_code (upc), title, price_including_tax, price_excluding_tax, number_available, product_description, category, review_rating, image_url \n')
-    extract.write(url + ',' + upc_code + ',' + title + ',' + price_including_tax + ',' + price_excluding_tax + ',' + number_available + ',' + product_description + ',' + book_category + ',' +  str(nb_rating) + ',' + img_url + '\n')
+with open('book.csv', 'w+', encoding='UTF-8', newline='') as extract:
+    wild = csv.writer(extract)
+    wild.writerow(('product_page_url','universal_ product_code (upc)', 'title', 'price_including_tax', 'price_excluding_tax', 'number_available', 'product_description', 'category', 'review_rating', 'image_url'))
+    wild.writerow([url , upc_code ,  title ,  price_including_tax ,  price_excluding_tax ,  number_available ,  product_description ,  book_category ,   str(nb_rating) ,  img_url])
 
 
 
